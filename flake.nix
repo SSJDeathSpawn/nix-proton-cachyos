@@ -15,7 +15,7 @@
       proton-cachyos = pkgs.stdenv.mkDerivation rec {
         name = "proton-cachyos";
         version = "10.0-20251107";
-        src = pkgs.lib.fetchurl {
+        src = pkgs.fetchurl {
           url = "https://github.com/CachyOS/proton-cachyos/releases/download/cachyos-${version}-slr/proton-cachyos-${version}-slr-x86_64.tar.xz";
           hash = "sha256-144095c329a4295d528aa1b3074c8cca901384c1275dc5063b507dc19c549bd0";
         };
