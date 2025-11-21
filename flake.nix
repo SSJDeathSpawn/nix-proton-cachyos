@@ -17,22 +17,22 @@
         version = "10.0-20251107";
         src = pkgs.fetchurl {
           url = "https://github.com/CachyOS/proton-cachyos/releases/download/cachyos-${version}-slr/proton-cachyos-${version}-slr-x86_64.tar.xz";
-          hash = "sha256-144095c329a4295d528aa1b3074c8cca901384c1275dc5063b507dc19c549bd0";
+          hash = "sha256-FECVwymkKV1SiqGzB0yMypAThMEnXcUGO1B9wZxUm9A=";
         };
         
-        nativeBuildInputs = [ pkgs.zstd ];
+        nativeBuildInputs = [ pkgs.zstd pkgs.xz ];
 
         installPhase = ''
-          tar -I zstd -xf $src
           mkdir -p $out/share/steam/compatibilitytools.d
-          mv usr/share/steam/compatibilitytools.d/proton-cachyos $out/share/steam/compatibilitytools.d/
+          tar -I xz -xf $src
+          mv proton-cachyos-${version}-slr-x86_64 $out/share/steam/compatibilitytools.d/
         '';
+
         meta = with pkgs.lib; {
           description = "CachyOS Proton build with additional patches and optimizations";
           homepage = "https://github.com/CachyOS/proton-cachyos";
           license = licenses.bsd3;
           platforms = [ "x86_64-linux" ];
-          maintainers = with maintainers; [ kimjongbing ];
         };
       };
 
